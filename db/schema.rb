@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_01_11_202355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "meditations", force: :cascade do |t|
+    t.string "user"
+    t.string "datetime"
+    t.integer "stresslevelbefore"
+    t.integer "stresslevelafter"
+    t.string "emotions"
+    t.string "meditation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end
