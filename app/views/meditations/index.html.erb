@@ -1,0 +1,25 @@
+<h1>Meditations</h1>
+
+
+	<table>
+		<tr>
+			<th>Participant Email Address</th>
+     		<th>Date and Time</th>
+			<th>Emotions (up to 5)</th>
+			<th>Meditation Name</th>
+			<th>Stress Rating (0-10) Before</th>
+			<th>Stress Rating (0-10) After</th>
+		</tr>
+
+		<% @meditations.each do |meditation|%>
+			<tr>
+                <td><%= meditation.user %></td>
+                <td><%= meditation.datetime %></td>
+                <td><%= meditation.emotions %></td>
+                <td><%= meditation.meditation %></td>
+                <td><%= meditation.stresslevelbefore %></td>
+                <td><%= meditation.stresslevelafter %></td>
+			</tr>
+		<% end %>
+
+	</table>
