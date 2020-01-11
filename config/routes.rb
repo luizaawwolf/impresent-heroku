@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   root 'meditations#index'
 
   post 'users/validate' => 'users#validate'
+
+  post 'meditations/numberofMeds' => 'meditations#numberOfMeds'
 end
