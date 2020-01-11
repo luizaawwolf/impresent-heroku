@@ -36,5 +36,12 @@ class UsersController < ApplicationController
 	end
 
 	def validate
+		@user = User.find_by_email(params['email'])
+		@attempted_password = params['password']
+		if @attempted_password == @user.password
+			render :json => {:message => "Success"}.to_json
+		else
+			render :json => {:message => "Denied"}.to_json
+		end
 	end
 end
