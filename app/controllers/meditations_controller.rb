@@ -22,7 +22,10 @@ skip_before_action :verify_authenticity_token
 
 		respond_to do |format|
 	      format.html
-	      format.json { render :json => @meditations } #maybe render json: @meditations
+	      format.js
+	      format.json do 
+	      	render json: @meditations.to_json
+	      end
 	    end
 	end
 
