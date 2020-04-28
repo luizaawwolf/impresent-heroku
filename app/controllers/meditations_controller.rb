@@ -67,4 +67,16 @@ skip_before_action :verify_authenticity_token
 
 		end 
     end
+
+    def numberOfMeds 
+    	user_name = params['user'] 
+    	count = 0 
+    	Meditation.all.each do |meditation| 
+    		if meditation.user == user_name 
+    			count = count + 1
+    		end 
+    	end
+
+    	render :json => count  
+    end 
 end
