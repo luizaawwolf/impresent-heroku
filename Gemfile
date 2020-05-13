@@ -53,5 +53,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-#WWWHISPER add on in Heroku
-gem 'rack-wwwhisper', '~> 1.0'
+# WWWHISPER add-on in Heroku
+gem 'rack-wwwhisper', '~> 1.0'  # This can be removed once AUTH0 works
+
+# AUTH0 add-on in Heroku
+gem 'omniauth-auth0', '~> 2.2'
+gem 'omniauth-rails_csrf_protection', '~> 0.1'

@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :meditations 
   resources :users
+
+  root 'home#show'
+
+  get 'home/show'
   get 'meditations/index'
-  root 'meditations#index'
+  get 'dashboard' => 'meditations#index'
+  get 'auth/auth0/callback' => 'auth0#callback'
+  get 'auth/failure' => 'auth0#failure'
+  get '/logout' => 'logout#logout'
 
   post 'users/validate' => 'users#validate'
-
   post 'meditations/numberofMeds' => 'meditations#numberOfMeds'
+
+
 end
