@@ -55,3 +55,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #WWWHISPER add on in Heroku
 gem 'rack-wwwhisper', '~> 1.0'
+
+# Protect passwords through encryption
+gem 'bcrypt', '~> 3.1', '>= 3.1.12'
