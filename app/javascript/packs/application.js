@@ -11,7 +11,7 @@ require("channels")
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 
-import "bootstrap"
+import "./bootstrap"
 import "../stylesheets/application"
 
 // Uncomment to copy all static images under ../images to the output folder and reference
