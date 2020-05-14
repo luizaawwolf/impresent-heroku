@@ -13,7 +13,6 @@ class AdminsController < ApplicationController
      session[:admin_id] = @admin.id
      redirect_to '/meditations/'
    else
-    puts "NOT PERMITTED"
      redirect_to '/welcome'
    end
   end

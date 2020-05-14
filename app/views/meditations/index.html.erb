@@ -1,11 +1,18 @@
-<h1>Meditations</h1>
-<%= button_to "Log out", '/logout', method: :post%>
+
+<div class="row">
+	<div class="col-md-8">
+		<h1>Meditations</h1>
+	</div>
+	<div class="col-md-4">
+		<%= button_to "Log out", '/logout', method: :post%>
+	</div>
+</div>
 
 <p>
 <%= link_to "Download CSV", meditations_path(format: "csv") %>
 </p>
 
-	<table>
+	<table class="table table-striped">
 		<tr>
 			<th>Participant Email Address</th>
      		<th>Date and Time</th>

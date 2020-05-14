@@ -1,7 +1,15 @@
-<h1>Welcome</h1>
-<% if logged_in? %>
-    <h1>You are Logged In, <%= current_admin.username %></h1>
-<%end%>
-<%= button_to "Login", '/login', method: :get%>
-<%= button_to "Sign Up", '/admins/new', method: :get%>
-<%= button_to "Log out", '/logout', method: :post%>
+<div class="row">
+	<div class="col-md-12">
+		<h1>Welcome</h1>
+	<div>
+</div>
+<br>
+<br>
+<div class="row">
+	<div class="col-md-6">
+		<%= button_to "Login", '/login', method: :get%>
+	</div>
+	<div class="col-md-6">
+		<%= button_to "Sign Up", '/admins/new', method: :get%>
+	</div>
+<div>
