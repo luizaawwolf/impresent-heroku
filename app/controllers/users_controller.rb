@@ -1,18 +1,32 @@
 class UsersController < ApplicationController
 	skip_before_action :verify_authenticity_token
+	skip_before_action :authorized, only: [:new, :create, :validate]
 	def new
-		@user = User.new
+		@admin = Admin.find_by(username: params[:username])
+	  	if @admin && @admin.authenticate(params[:password])
+			@user = User.new
+		else
+			render json: 404
+		end
 	end
 
 	def create
-		@user = User.new(:email => params['email'], :password => params['password'])
-		# @meditation.save
-		if @user.save
-			puts "SAVED"
+		@admin = Admin.find_by(username: params[:username])
+		puts "CREATE"
+	  	if @admin && @admin.authenticate(params[:password])
+	  		puts "ADMIN VALID"
+			@user = User.new(:email => params['email'], :password => params['userpassword'])
+			if @user.save
+				puts "SAVED"
+			else
+				#render 'new'
+			end
+			render :json => {:message => "Success"}.to_json
 		else
-			#render 'new'
-		end
-		render :json => {:message => "Success"}.to_json
+	      respond_to do |format|
+	        format.json { render json: 404 }
+	      end
+	  	end
 	end
 
 	def index
@@ -36,16 +50,29 @@ class UsersController < ApplicationController
 	end
 
 	def validate
-		@user = User.find_by_email(params['email'])
-		@attempted_password = params['password']
-		if @user
-			if @attempted_password == @user.password
-				render :json => {:message => "Success"}.to_json
+		@admin = Admin.find_by(username: params[:username])
+		puts "Testing admin..."
+		puts @admin 
+		if @admin && @admin.authenticate(params[:password])
+	  		@user = User.find_by_email(params['email'])
+			@attempted_password = params['userpassword']
+			puts "Validating...."
+			if @user
+				puts "Better..."
+				if @attempted_password == @user.password
+					puts "Best..."
+					render :json => {:message => "Success"}.to_json
+				else
+					puts "Exit..."
+					render :json => {:message => "Denied"}.to_json
+				end
 			else
-				render :json => {:message => "Denied"}.to_json
+				render :json => {:message => "User does not exist"}.to_json
 			end
 		else
-			render :json => {:message => "User does not exist"}.to_json
-		end
+	      respond_to do |format|
+	        format.json { render json: 404 }
+	      end
+	  	end
 	end
 end

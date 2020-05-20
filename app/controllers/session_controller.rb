@@ -8,15 +8,21 @@ class SessionController < ApplicationController
 
   def create
   	@admin = Admin.find_by(username: params[:username])
+    puts "in create"
   	if @admin && @admin.authenticate(params[:password])
       session[:admin_id] = @admin.id
-      redirect_to '/welcome'
       respond_to do |format|
-        format.html
-        format.json { render json: @admin }
+        puts "MEDS: #{@meditations}"
+        puts "logged #{logged_in?}"
+        format.html { redirect_to '/welcome'}
+        #format.json { redirect_to '/welcome'}
+        format.json { render json: @meditations }
       end
   	else
-      redirect_to '/login'
+      respond_to do |format|
+        format.html { redirect_to '/login'}
+        format.json { render json: 404 }
+      end
   	end
   end
 
@@ -29,6 +35,7 @@ class SessionController < ApplicationController
   end
 
   def welcome
+    puts "log #{logged_in?}"
     if logged_in?
       redirect_to '/meditations'
     end

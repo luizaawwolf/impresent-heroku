@@ -6,7 +6,7 @@ class AdminsController < ApplicationController
   end
 
   def create
-   permitted_admins = ["stephanie.schuette@duke.edu"]
+   permitted_admins = ["stephanie.schuette@duke.edu","app"]
    if params[:admin][:username].in?(permitted_admins)
      @admin = Admin.create(params.require(:admin).permit(:username,        
      :password))

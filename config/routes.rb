@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   post 'login', to: 'session#create'
   post 'logout', to: 'session#logout'
+  post 'users/create', to: 'users#create'
   post 'users/validate' => 'users#validate'
   post 'meditations/numberofMeds' => 'meditations#numberOfMeds'
+  post 'meditations'=>'meditations#create'
 end

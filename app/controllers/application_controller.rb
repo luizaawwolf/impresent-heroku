@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 	before_action :authorized
 	helper_method :current_admin
 	helper_method :logged_in?
+	protect_from_forgery with: :null_session
 
 	def current_admin
 		Admin.find_by(id: session[:admin_id])

@@ -4,21 +4,36 @@ require 'uri'
 
 class MeditationsController < ApplicationController
 skip_before_action :verify_authenticity_token
+skip_before_action :authorized, only: [:new, :create]
 	def new
-		@meditation = Meditation.new
+		@admin = Admin.find_by(username: params[:username])
+	  	if @admin && @admin.authenticate(params[:password])
+			@meditation = Meditation.new
+		else
+			render json: 404
+		end
 	end
 
 	def create
-		@meditation = Meditation.new(:user => params['user'], :datetime => params['datetime'], 
+		puts "AT CREATE"
+		@admin = Admin.find_by(username: params[:username])
+	  	if @admin && @admin.authenticate(params[:password])
+	      	session[:admin_id] = @admin.id
+	      	#make meditation
+	    	@meditation = Meditation.new(:user => params['user'], :datetime => params['datetime'], 
 			:stresslevelbefore => params['stressbefore'], :stresslevelafter => params['stressafter'],
 			:emotions => params['emotions'], :meditation => params['meditation'])
-		# @meditation.save
-		if @meditation.save
-			puts "SAVED"
-		else
-			#render 'new'
-		end
-		render :json => {:message => "Success"}.to_json
+			if @meditation.save
+				puts "SAVED"
+			else
+				#render 'new'
+			end
+			render :json => {:message => "Success"}.to_json
+	  	else
+	      respond_to do |format|
+	        format.json { render json: 404 }
+	      end
+	  	end
 	end
 
 	def index
