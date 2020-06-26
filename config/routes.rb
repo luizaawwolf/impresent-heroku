@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'session/new'
-  get 'session/create'
+  get 'session/create' => 'session#create'
+  post 'session/create' => 'session#create'
   get 'session/login'
   get 'session/welcome'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
