@@ -1,7 +1,7 @@
 require 'net/http'
 require 'json'
 class SessionController < ApplicationController
-  skip_before_action :authorized, only: [:new, :create, :welcome]
+  #skip_before_action :authorized, only: [:new, :create, :welcome]
 
   def new
   end

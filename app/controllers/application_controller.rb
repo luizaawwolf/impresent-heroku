@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-	before_action :authorized
+	#before_action :authorized
 	helper_method :current_admin
 	helper_method :logged_in?
 

@@ -3,6 +3,7 @@ require 'json'
 require 'uri'
 
 class MeditationsController < ApplicationController
+before_action :authorized #new
 skip_before_action :verify_authenticity_token
 	def new
 		@meditation = Meditation.new
