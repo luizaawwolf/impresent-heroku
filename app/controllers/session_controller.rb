@@ -4,9 +4,11 @@ class SessionController < ApplicationController
   #skip_before_action :authorized, only: [:new, :create, :welcome]
 
   def new
+    puts "new method"
   end
 
   def create
+    puts "creating session"
   	@admin = Admin.find_by(username: params[:username])
   	if @admin && @admin.authenticate(params[:password])
       session[:admin_id] = @admin.id
@@ -26,6 +28,7 @@ class SessionController < ApplicationController
   end
 
   def login
+    puts "login method"
   end
 
   def welcome

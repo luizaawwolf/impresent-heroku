@@ -3,13 +3,16 @@ require 'json'
 require 'uri'
 
 class MeditationsController < ApplicationController
-before_action :authorized #new
+before_action :authorized, only: [:index, :edit, :show, :destroy, :to_csv]
+before_action :create_session, only: [:new, :create]
+protect_from_forgery
 skip_before_action :verify_authenticity_token
 	def new
 		@meditation = Meditation.new
 	end
 
 	def create
+		puts "creating med"
 		@meditation = Meditation.new(:user => params['user'], :datetime => params['datetime'], 
 			:stresslevelbefore => params['stressbefore'], :stresslevelafter => params['stressafter'],
 			:emotions => params['emotions'], :meditation => params['meditation'])
