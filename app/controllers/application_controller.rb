@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 	  	if @admin && @admin.authenticate(params[:password])
 	      session[:admin_id] = @admin.id
 	  	else
-	  	  redirect_to '/welcome'
+	  	  render :json => {:message => "Denied"}.to_json
 	  	end
   	end
 end
