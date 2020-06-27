@@ -1,5 +1,4 @@
 class AdminsController < ApplicationController
-  skip_before_action :authorized, only: [:new, :create]
   
   def new
   	@admin = Admin.new
